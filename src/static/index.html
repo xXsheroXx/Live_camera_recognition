@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Live Camera Recognition</title>
+    <style>
+      :root {
+        --bg: #0f141b;
+        --panel: #151c24;
+        --text: #e7eef7;
+        --accent: #4bd37b;
+        --warn: #ffb454;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+        background: radial-gradient(1200px 800px at 10% 10%, #1b2430, var(--bg));
+        color: var(--text);
+      }
+      header {
+        padding: 16px 20px;
+        border-bottom: 1px solid #243041;
+        background: rgba(21, 28, 36, 0.85);
+        backdrop-filter: blur(8px);
+      }
+      header h1 { margin: 0; font-size: 18px; letter-spacing: 0.4px; }
+      main { padding: 20px; display: grid; gap: 16px; }
+      .panel {
+        background: var(--panel);
+        border: 1px solid #243041;
+        border-radius: 12px;
+        padding: 12px;
+      }
+      .controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+      button {
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-weight: 600;
+        color: #0c141c;
+        background: var(--accent);
+        cursor: pointer;
+      }
+      button.secondary { background: #2b3646; color: var(--text); }
+      button:disabled { opacity: 0.5; cursor: not-allowed; }
+      #status { font-size: 13px; color: var(--warn); }
+      .stage {
+        position: relative;
+        width: min(960px, 100%);
+        aspect-ratio: 16 / 9;
+        margin: 0 auto;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #243041;
+        background: #0b0f14;
+      }
+      video, canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .hint { font-size: 13px; opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Live Camera Recognition (WebRTC)</h1>
+    </header>
+    <main>
+      <section class="panel controls">
+        <button id="startBtn">Start</button>
+        <button id="stopBtn" class="secondary" disabled>Stop</button>
+        <span id="status">Idle</span>
+      </section>
+      <section class="panel">
+        <div class="stage">
+          <video id="video" autoplay playsinline muted></video>
+          <canvas id="overlay"></canvas>
+        </div>
+        <p class="hint">Allow camera access when prompted. Detections will be drawn on the video.</p>
+      </section>
+    </main>
+    <script src="/static/client.js"></script>
+  </body>
+</html>
