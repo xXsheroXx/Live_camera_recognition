@@ -1,3 +1,7 @@
 .env
 /livecam
 yolov8n.pt
+.vLiveCam/
+.venv/
+__pycache__/
+*.pyc
